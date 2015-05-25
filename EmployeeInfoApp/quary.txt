@@ -1,0 +1,49 @@
+create database EmployeDB
+
+use EmployeDB
+
+
+create table Designation
+(
+id int identity primary key,
+name varchar (50)
+)
+
+insert into Designation values ('Executive Officer')
+
+create table Employee
+(
+id int identity primary key,
+name varchar (50),
+email varchar (150),
+[address] varchar (150),
+designationId int foreign key  references dbo.Designation(id)
+)
+
+
+create table Zone
+(
+id int primary key identity,
+zoneName nvarchar (150)
+)
+
+create table Visitor
+(
+id int primary key identity,
+name nvarchar (50),
+email nvarchar (100),
+mobile nvarchar (15),
+zoneId int foreign key references Zone (id)
+)
+
+insert into Zone values ('Gazipur')
+select * from Zone
+select *  from Visitor
+
+insert into Visitor values ('Riyad', 'riyadair@gmail.com','01900587260',1)
+
+select [name] as 'Visitor Name', [email] as 'Email', [mobile] as 'Contact' from [dbo].[Visitor]  join [dbo].[Zone] on [dbo].[Visitor].zoneId=[dbo].[Zone].id where [dbo].[Zone].id=1
+
+
+select [name] ,[email] ,[mobile] from [dbo].[Visitor]  join [dbo].[Zone] 
+on [dbo].[Visitor].zoneId=[dbo].[Zone].id where [dbo].[Zone].id=3
